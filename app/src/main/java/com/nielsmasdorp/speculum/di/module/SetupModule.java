@@ -7,7 +7,6 @@ import com.nielsmasdorp.speculum.interactor.SetupInteractor;
 import com.nielsmasdorp.speculum.interactor.SetupInteractorImpl;
 import com.nielsmasdorp.speculum.presenters.SetupPresenter;
 import com.nielsmasdorp.speculum.presenters.SetupPresenterImpl;
-import com.nielsmasdorp.speculum.services.GoogleMapsService;
 import com.nielsmasdorp.speculum.services.SharedPreferenceService;
 import com.nielsmasdorp.speculum.views.SetupView;
 
