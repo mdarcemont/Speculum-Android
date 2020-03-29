@@ -78,13 +78,11 @@ public class Constants {
     public static final String UPDATE_PHRASE = "update";
     public static final String JOKE_PHRASE = "tell me a joke";
     public static final String SLEEP_PHRASE = "go to sleep";
-    public static final String MAP_PHRASE = "show my location";
 
     /**
      * TTS phrases
      */
     public static final String UPDATE_NOTIFICATION = "Okay, here is new data.";
-    public static final String MAP_NOTIFICATION = "Okay, here is a map.";
     public static final String SLEEP_NOTIFICATION = "I am going back to sleep, bye bye.";
     public static final String WAKE_NOTIFICATION = "Hello there. What can I do for you?";
 
