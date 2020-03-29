@@ -3,6 +3,7 @@ package com.nielsmasdorp.speculum.interactor;
 import android.app.Application;
 
 import com.nielsmasdorp.speculum.models.Configuration;
+import com.nielsmasdorp.speculum.services.GoogleMapsService;
 import com.nielsmasdorp.speculum.services.SharedPreferenceService;
 import com.nielsmasdorp.speculum.util.Constants;
 
@@ -18,11 +19,13 @@ public class SetupInteractorImpl implements SetupInteractor {
 
     Application application;
     SharedPreferenceService preferenceService;
+    GoogleMapsService googleMapService;
 
-    public SetupInteractorImpl(Application application, SharedPreferenceService preferenceService) {
+    public SetupInteractorImpl(Application application, SharedPreferenceService preferenceService, GoogleMapsService googleMapService) {
 
         this.application = application;
         this.preferenceService = preferenceService;
+        this.googleMapService = googleMapService;
     }
 
     @Override
@@ -39,7 +42,9 @@ public class SetupInteractorImpl implements SetupInteractor {
 
     @Override
     public void validate(String location, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout, Subscriber<Configuration> configurationSubscriber) {
-        Observable.just(preferenceService.getRememberedConfiguration())
+        googleMapService.getApi().getLatLongForAddress(location.isEmpty() ? Constants.LOCATION_DEFAULT : location, "false")
+                .flatMap(googleMapService::getLatLong)
+                .flatMap(latLng -> generateConfiguration(latLng, subreddit, pollingDelay, celsius, voiceCommands, rememberConfig, simpleLayout))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(configurationSubscriber);

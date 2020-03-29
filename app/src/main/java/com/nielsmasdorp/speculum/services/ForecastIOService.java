@@ -65,7 +65,7 @@ public class ForecastIOService {
 
         int AMOUNT_OF_DAYS_IN_FORECAST = 4;
         for (int i = 0; i < AMOUNT_OF_DAYS_IN_FORECAST; i++) {
-            DayForecast f = response.getForecast().getData().get(i+1);
+            DayForecast f = response.getForecast().getData().get(i + 1);
             String date = dateFormatter.format(new Date((long) f.getTime() * 1000));
             int intTemp = (f.getTemperatureMin().intValue() + f.getTemperatureMax().intValue()) / 2;
             String temp = intTemp + "º" + temperatureUnit;

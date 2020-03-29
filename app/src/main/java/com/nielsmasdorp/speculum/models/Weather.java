@@ -32,15 +32,50 @@ public class Weather {
         private String visibilityInfo;
         private List<ForecastDayWeather> forecast;
 
-        public Builder iconId(int iconId) { this.iconId = iconId; return this;}
-        public Builder temperature(String temperature) { this.temperature = temperature; return this; }
-        public Builder summary(String summary) { this.summary = summary; return this; }
-        public Builder lastUpdated(String lastUpdated) { this.lastUpdated = lastUpdated; return this; }
-        public Builder windInfo(String windInfo) { this.windInfo = windInfo; return this; }
-        public Builder humidityInfo(String humidityInfo) { this.humidityInfo = humidityInfo; return this; }
-        public Builder pressureInfo(String pressureInfo) { this.pressureInfo = pressureInfo; return this; }
-        public Builder visibilityInfo(String visibilityInfo) { this.visibilityInfo = visibilityInfo; return this; }
-        public Builder forecast(List<ForecastDayWeather> forecast) { this.forecast = forecast; return this; }
+        public Builder iconId(int iconId) {
+            this.iconId = iconId;
+            return this;
+        }
+
+        public Builder temperature(String temperature) {
+            this.temperature = temperature;
+            return this;
+        }
+
+        public Builder summary(String summary) {
+            this.summary = summary;
+            return this;
+        }
+
+        public Builder lastUpdated(String lastUpdated) {
+            this.lastUpdated = lastUpdated;
+            return this;
+        }
+
+        public Builder windInfo(String windInfo) {
+            this.windInfo = windInfo;
+            return this;
+        }
+
+        public Builder humidityInfo(String humidityInfo) {
+            this.humidityInfo = humidityInfo;
+            return this;
+        }
+
+        public Builder pressureInfo(String pressureInfo) {
+            this.pressureInfo = pressureInfo;
+            return this;
+        }
+
+        public Builder visibilityInfo(String visibilityInfo) {
+            this.visibilityInfo = visibilityInfo;
+            return this;
+        }
+
+        public Builder forecast(List<ForecastDayWeather> forecast) {
+            this.forecast = forecast;
+            return this;
+        }
 
         public Weather build() {
 

@@ -36,18 +36,29 @@ import butterknife.OnClick;
  */
 public class SetupActivity extends AppCompatActivity implements SetupView, View.OnSystemUiVisibilityChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    @BindView(R.id.et_location) EditText etLocation;
-    @BindView(R.id.et_subreddit) EditText etSubreddit;
-    @BindView(R.id.tv_reddit_title) TextView tvRedditTitle;
-    @BindView(R.id.et_polling_delay) EditText etPollingDelay;
-    @BindView(R.id.rb_celsius) RadioButton rbCelsius;
-    @BindView(R.id.rb_simple) RadioButton rbSimpleLayout;
-    @BindView(R.id.cb_voice_commands) CheckBox cbVoiceCommands;
-    @BindView(R.id.cb_remember_config) CheckBox cbRememberConfig;
+    @BindView(R.id.et_location)
+    EditText etLocation;
+    @BindView(R.id.et_subreddit)
+    EditText etSubreddit;
+    @BindView(R.id.tv_reddit_title)
+    TextView tvRedditTitle;
+    @BindView(R.id.et_polling_delay)
+    EditText etPollingDelay;
+    @BindView(R.id.rb_celsius)
+    RadioButton rbCelsius;
+    @BindView(R.id.rb_simple)
+    RadioButton rbSimpleLayout;
+    @BindView(R.id.cb_voice_commands)
+    CheckBox cbVoiceCommands;
+    @BindView(R.id.cb_remember_config)
+    CheckBox cbRememberConfig;
 
-    @BindString(R.string.validating) String validating;
-    @BindString(R.string.no_permission_for_voice) String noPermissionForVoice;
-    @BindString(R.string.no_permission_for_calendar) String noPermissionForCalendar;
+    @BindString(R.string.validating)
+    String validating;
+    @BindString(R.string.no_permission_for_voice)
+    String noPermissionForVoice;
+    @BindString(R.string.no_permission_for_calendar)
+    String noPermissionForCalendar;
 
     @Inject
     SetupPresenter presenter;

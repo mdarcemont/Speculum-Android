@@ -297,7 +297,7 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
     @SuppressWarnings("deprecation")
     public void speak(String sentence) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            String utteranceId = this.hashCode() "";
+            String utteranceId = this.hashCode() + "";
             textToSpeech.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, utteranceId);
         } else {
             HashMap<String, String> map = new HashMap<>();

@@ -40,7 +40,7 @@ public class GoogleMapsService {
         Result bestResult = response.getResults().get(0);
         Location location = bestResult.getGeometry().getLocation();
 
-        return Observable.just(location.getLat()","location.getLng());
+        return Observable.just(location.getLat() + "," + location.getLng());
     }
 
     public GoogleMapsApi getApi() {

@@ -2,7 +2,7 @@ package com.nielsmasdorp.speculum.util;
 
 /**
  * @author Niels Masdorp (NielsMasdorp)
- *
+ * <p>
  * Credits: https://github.com/asifmujteba/AndroidObjectStore
  */
 public class ASFObjectStore<T> {
