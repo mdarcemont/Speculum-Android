@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @BindString(R.string.command_understood) String commandUnderstood;
     @BindString(R.string.executing) String executing;
     @BindString(R.string.last_updated) String lastUpdated;
-    @BindString(R.string.static_maps_api_key) String mapsApiKey;
 
     // @formatter:on
 
@@ -150,33 +149,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     public void hideListening() {
         ivListening.clearAnimation();
         ivListening.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showMap(String location) {
-
-        String url = Constants.STATIC_MAPS_URL_FIRST +
-                location + Constants.STATIC_MAPS_URL_SECOND +
-                location + Constants.STATIC_MAPS_URL_THIRD +
-                mapsApiKey;
-
-        mapDialog = new MaterialDialog.Builder(this)
-                .customView(R.layout.map_image, false)
-                .contentGravity(GravityEnum.CENTER)
-                .build();
-
-        View imageView = mapDialog.getCustomView();
-        Picasso.with(MainActivity.this).load(url).into((ImageView) imageView);
-        mapDialog.show();
-    }
-
-    @Override
-    public void hideMap() {
-        if (null != mapDialog && mapDialog.isShowing()) {
-            mapDialog.dismiss();
-            mapDialog = null;
-        }
-        hideSystemUI();
     }
 
     @Override

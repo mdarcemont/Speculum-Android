@@ -103,7 +103,6 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
             textToSpeech.shutdown();
         }
         view.hideListening();
-        view.hideMap();
         interactor.unSubscribe();
     }
 
@@ -242,40 +241,7 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
                 interactor.loadYoMommaJoke(new YoMammaJokeSubscriber());
                 setListeningMode(Constants.COMMANDS_SEARCH);
                 break;
-            case Constants.MAP_PHRASE:
-                speak(Constants.MAP_NOTIFICATION);
-                setListeningMode(Constants.COMMANDS_SEARCH);
-                showMap();
-                break;
         }
-    }
-
-    private void showMap() {
-
-        timeOut(10)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Void>() {
-
-                    @Override
-                    public void onStart() {
-                        view.showMap(configuration.getLocation());
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        view.hideMap();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.showError(e.getLocalizedMessage());
-                    }
-
-                    @Override
-                    public void onNext(Void aVoid) {
-                    }
-                });
     }
 
     private Observable<Void> timeOut(Integer seconds) {

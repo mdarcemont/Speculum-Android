@@ -19,13 +19,11 @@ public class SetupInteractorImpl implements SetupInteractor {
 
     Application application;
     SharedPreferenceService preferenceService;
-    GoogleMapsService googleMapService;
 
-    public SetupInteractorImpl(Application application, SharedPreferenceService preferenceService, GoogleMapsService googleMapService) {
+    public SetupInteractorImpl(Application application, SharedPreferenceService preferenceService) {
 
         this.application = application;
         this.preferenceService = preferenceService;
-        this.googleMapService = googleMapService;
     }
 
     @Override
@@ -43,12 +41,6 @@ public class SetupInteractorImpl implements SetupInteractor {
     @Override
     public void validate(String location, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout, Subscriber<Configuration> configurationSubscriber) {
 
-        googleMapService.getApi().getLatLongForAddress(location.isEmpty() ? Constants.LOCATION_DEFAULT : location, "false")
-                .flatMap(googleMapService::getLatLong)
-                .flatMap(latLng -> generateConfiguration(latLng, subreddit, pollingDelay, celsius, voiceCommands, rememberConfig, simpleLayout))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(configurationSubscriber);
     }
 
     private Observable<Configuration> generateConfiguration(String latLong, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout) {

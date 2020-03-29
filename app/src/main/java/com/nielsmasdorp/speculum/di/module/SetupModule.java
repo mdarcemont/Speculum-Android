@@ -28,9 +28,9 @@ public class SetupModule {
 
     @Provides
     @PerActivity
-    public SetupInteractor provideSetupInteractor(Application application, SharedPreferenceService preferenceService, GoogleMapsService googleMapService) {
+    public SetupInteractor provideSetupInteractor(Application application, SharedPreferenceService preferenceService) {
 
-        return new SetupInteractorImpl(application, preferenceService, googleMapService);
+        return new SetupInteractorImpl(application, preferenceService);
     }
 
     @Provides
