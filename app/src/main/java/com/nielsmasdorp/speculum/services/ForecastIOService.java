@@ -50,8 +50,6 @@ public class ForecastIOService {
 
         boolean is24HourFormat = DateFormat.is24HourFormat(application);
 
-        String distanceUnit = metric ? Constants.DISTANCE_METRIC : Constants.DISTANCE_IMPERIAL;
-        String pressureUnit = metric ? Constants.PRESSURE_METRIC : Constants.PRESSURE_IMPERIAL;
         String speedUnit = metric ? Constants.SPEED_METRIC : Constants.SPEED_IMPERIAL;
         String temperatureUnit = metric ? Constants.TEMPERATURE_METRIC : Constants.TEMPERATURE_IMPERIAL;
 
@@ -80,8 +78,6 @@ public class ForecastIOService {
                 .lastUpdated(new SimpleDateFormat(!is24HourFormat ? "h:mm" : "H:mm", Locale.getDefault()).format(new Date((long) response.getCurrently().getTime() * 1000)))
                 .windInfo(response.getCurrently().getWindSpeed().intValue() + speedUnit + " " + direction + " | " + response.getCurrently().getApparentTemperature().intValue() + "º" + temperatureUnit)
                 .humidityInfo((int) (response.getCurrently().getHumidity() * 100) + "%")
-                .pressureInfo(response.getCurrently().getPressure().intValue() + pressureUnit)
-                .visibilityInfo(response.getCurrently().getVisibility().intValue() + distanceUnit)
                 .forecast(forecast)
                 .build());
     }

@@ -14,8 +14,6 @@ public class Currently {
     private Double humidity;
     private Double windSpeed;
     private Double windBearing;
-    private Double visibility;
-    private Double pressure;
 
     public Integer getTime() {
         return time;
@@ -55,13 +53,5 @@ public class Currently {
 
     public Double getWindBearing() {
         return windBearing;
-    }
-
-    public Double getVisibility() {
-        return visibility;
-    }
-
-    public Double getPressure() {
-        return pressure;
     }
 }

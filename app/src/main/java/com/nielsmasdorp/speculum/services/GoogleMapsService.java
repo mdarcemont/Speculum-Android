@@ -51,6 +51,6 @@ public class GoogleMapsService {
     public interface GoogleMapsApi {
 
         @GET("json")
-        Observable<GoogleMapsResponse> getLatLongForAddress(@Query("address") String address, @Query("sensor") String sensorBool);
+        Observable<GoogleMapsResponse> getLatLongForAddress(@Query("address") String address, @Query("key") String googleApiKey);
     }
 }

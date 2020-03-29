@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.WindowManager;
@@ -24,6 +25,7 @@ import com.nielsmasdorp.speculum.SpeculumApplication;
 import com.nielsmasdorp.speculum.models.Configuration;
 import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
 import com.nielsmasdorp.speculum.presenters.MainPresenter;
 import com.nielsmasdorp.speculum.util.ASFObjectStore;
 import com.nielsmasdorp.speculum.util.Constants;
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @Nullable
     @BindView(R.id.calendar_layout)
     LinearLayout llCalendarLayout;
+    @Nullable
+    @BindView(R.id.ratp_layout)
+    LinearLayout llRatpLayout;
     @Nullable
     @BindView(R.id.reddit_layout)
     LinearLayout llRedditLayout;
@@ -108,12 +113,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @BindView(R.id.tv_stats_humidity)
     TextView tvWeatherHumidity;
     @Nullable
-    @BindView(R.id.tv_stats_pressure)
-    TextView tvWeatherPressure;
-    @Nullable
-    @BindView(R.id.tv_stats_visibility)
-    TextView tvWeatherVisibility;
-    @Nullable
     @BindView(R.id.tv_calendar_event)
     TextView tvCalendarEvent;
     @Nullable
@@ -122,6 +121,11 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @Nullable
     @BindView(R.id.tv_reddit_post_votes)
     TextView tvRedditPostVotes;
+    @BindView(R.id.tv_ratp_line_title)
+    TextView tvRatpLineTitle;
+    @Nullable
+    @BindView(R.id.tv_ratp_line_message)
+    TextView tvRatpLineMessage;
 
     @BindString(R.string.old_config_found_snackbar)
     String oldConfigFound;
@@ -137,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     String executing;
     @BindString(R.string.last_updated)
     String lastUpdated;
+    @BindString(R.string.google_api_key) String googleApiKey;
 
     @Inject
     MainPresenter presenter;
@@ -220,8 +225,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
             // More weather info
             this.tvWeatherWind.setText(weather.getWindInfo());
             this.tvWeatherHumidity.setText(weather.getHumidityInfo());
-            this.tvWeatherPressure.setText(weather.getPressureInfo());
-            this.tvWeatherVisibility.setText(weather.getVisibilityInfo());
             // Forecast
             this.tvDayOneDate.setText(weather.getForecast().get(0).getDate());
             this.tvDayOneTemperature.setText(weather.getForecast().get(0).getTemperature());
@@ -244,6 +247,18 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
             this.llWeatherStatsLayout.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    @SuppressWarnings("all")
+    public void displayRatpStatus(RatpLineStatus ratpLineStatus) {
+        System.err.println(ratpLineStatus.toString());
+        Log.d("MyApp", ratpLineStatus.toString());
+        tvRatpLineTitle.setText(ratpLineStatus.getTitle());
+        tvRatpLineMessage.setText(ratpLineStatus.getMessage());
+        if (this.llRatpLayout.getVisibility() != View.VISIBLE)
+            this.llRatpLayout.setVisibility(View.VISIBLE);
+    }
+
 
     @Override
     @SuppressWarnings("all")

@@ -13,6 +13,7 @@ import com.nielsmasdorp.speculum.models.Configuration;
 import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
 import com.nielsmasdorp.speculum.models.YoMommaJoke;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
 import com.nielsmasdorp.speculum.util.Constants;
 import com.nielsmasdorp.speculum.views.MainView;
 
@@ -69,6 +70,7 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
             }
             if (!configuration.isSimpleLayout()) {
                 startReddit();
+                startRatp();
                 if (hasAccessToCalendar) {
                     startCalendar();
                 }
@@ -82,6 +84,7 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
             startWeather();
             if (!configuration.isSimpleLayout()) {
                 startReddit();
+                startRatp();
                 startCalendar();
             }
         }
@@ -120,6 +123,10 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
 
     private void startReddit() {
         interactor.loadTopRedditPost(configuration.getSubreddit(), configuration.getPollingDelay(), new RedditSubscriber());
+    }
+
+    private void startRatp() {
+        interactor.loadRatpStatus(configuration.getPollingDelay(), new RatpSubscriber());
     }
 
     private void startCalendar() {
@@ -356,6 +363,23 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
         @Override
         public void onNext(RedditPost redditPost) {
             view.displayTopRedditPost(redditPost);
+        }
+    }
+
+    private final class RatpSubscriber extends Subscriber<RatpLineStatus> {
+
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            view.showError(e.getMessage());
+        }
+
+        @Override
+        public void onNext(RatpLineStatus ratpLineStatus) {
+            view.displayRatpStatus(ratpLineStatus);
         }
     }
 

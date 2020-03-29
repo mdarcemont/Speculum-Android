@@ -295,60 +295,6 @@
                 android:textSize="24dp"
                 tools:text="Humidity"/>
 
-            <ImageView
-                android:id="@+id/iv_stats_pressure"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/iv_stats_humidity"
-                android:layout_marginBottom="8dp"
-                android:paddingBottom="4dp"
-                android:paddingEnd="4dp"
-                android:paddingStart="0dp"
-                android:paddingTop="4dp"
-                android:src="@drawable/ic_gauge"
-                android:tint="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_stats_pressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_stats_pressure"
-                android:layout_below="@+id/iv_stats_humidity"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/iv_stats_pressure"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                tools:text="Pressure in mb"/>
-
-            <ImageView
-                android:id="@+id/iv_stats_visibility"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/iv_stats_pressure"
-                android:paddingBottom="4dp"
-                android:paddingEnd="4dp"
-                android:paddingStart="0dp"
-                android:paddingTop="4dp"
-                android:src="@drawable/ic_visibility"
-                android:tint="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_stats_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_stats_visibility"
-                android:layout_below="@+id/iv_stats_pressure"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/iv_stats_visibility"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                tools:text="Visibility in km"/>
 
         </RelativeLayout>
 
@@ -408,6 +354,54 @@
             android:textColor="@color/white"
             android:textSize="28dp"
             tools:text="Very important stuff ya know, Very important stuff ya know, Very important stuff ya know, Very important stuff ya know"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:id="@+id/ratp_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_ratp_line_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="26dp"
+                tools:text="9.9k"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ratp_line_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            tools:text="RER B"/>
 
     </LinearLayout>
 

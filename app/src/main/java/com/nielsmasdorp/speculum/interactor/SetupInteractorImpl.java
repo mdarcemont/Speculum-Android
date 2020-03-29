@@ -2,6 +2,8 @@ package com.nielsmasdorp.speculum.interactor;
 
 import android.app.Application;
 
+import com.nielsmasdorp.speculum.R;
+import com.nielsmasdorp.speculum.activity.MainActivity;
 import com.nielsmasdorp.speculum.models.Configuration;
 import com.nielsmasdorp.speculum.services.GoogleMapsService;
 import com.nielsmasdorp.speculum.services.SharedPreferenceService;
@@ -41,8 +43,10 @@ public class SetupInteractorImpl implements SetupInteractor {
     }
 
     @Override
-    public void validate(String location, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout, Subscriber<Configuration> configurationSubscriber) {
-        googleMapService.getApi().getLatLongForAddress(location.isEmpty() ? Constants.LOCATION_DEFAULT : location, "false")
+    public void validate(String location, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands,
+                         boolean rememberConfig, boolean simpleLayout, Subscriber<Configuration> configurationSubscriber) {
+        String key = application.getString(R.string.google_api_key);
+        googleMapService.getApi().getLatLongForAddress(location.isEmpty() ? Constants.LOCATION_DEFAULT : location, key)
                 .flatMap(googleMapService::getLatLong)
                 .flatMap(latLng -> generateConfiguration(latLng, subreddit, pollingDelay, celsius, voiceCommands, rememberConfig, simpleLayout))
                 .subscribeOn(Schedulers.io())

@@ -2,6 +2,7 @@ package com.nielsmasdorp.speculum.views;
 
 import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
 
 /**
  * @author Niels Masdorp (NielsMasdorp)
@@ -17,4 +18,6 @@ public interface MainView extends BaseView {
     void displayCalendarEvents(String events);
 
     void displayTopRedditPost(RedditPost redditPost);
+
+    void displayRatpStatus(RatpLineStatus ratpLineStatus);
 }

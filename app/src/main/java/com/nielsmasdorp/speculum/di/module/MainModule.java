@@ -9,6 +9,7 @@ import com.nielsmasdorp.speculum.presenters.MainPresenter;
 import com.nielsmasdorp.speculum.presenters.MainPresenterImpl;
 import com.nielsmasdorp.speculum.services.ForecastIOService;
 import com.nielsmasdorp.speculum.services.GoogleCalendarService;
+import com.nielsmasdorp.speculum.services.RatpService;
 import com.nielsmasdorp.speculum.services.RedditService;
 import com.nielsmasdorp.speculum.services.YoMommaService;
 import com.nielsmasdorp.speculum.util.WeatherIconGenerator;
@@ -43,8 +44,10 @@ public class MainModule {
                                                 ForecastIOService forecastIOService,
                                                 GoogleCalendarService googleCalendarService,
                                                 RedditService redditService,
+                                                RatpService ratpService,
                                                 YoMommaService yoMommaService, WeatherIconGenerator iconGenerator) {
 
-        return new MainInteractorImpl(application, forecastIOService, googleCalendarService, redditService, yoMommaService, iconGenerator);
+        return new MainInteractorImpl(application, forecastIOService, googleCalendarService, redditService,
+                ratpService, yoMommaService, iconGenerator);
     }
 }
