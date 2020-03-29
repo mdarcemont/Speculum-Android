@@ -41,10 +41,10 @@ public class MainModule {
     @PerActivity
     public MainInteractor provideMainInteractor(Application application,
                                                 ForecastIOService forecastIOService,
-                                                GoogleCalendarService googleMapService,
+                                                GoogleCalendarService googleCalendarService,
                                                 RedditService redditService,
                                                 YoMommaService yoMommaService, WeatherIconGenerator iconGenerator) {
 
-        return new MainInteractorImpl(application, forecastIOService, googleMapService, redditService, yoMommaService, iconGenerator);
+        return new MainInteractorImpl(application, forecastIOService, googleCalendarService, redditService, yoMommaService, iconGenerator);
     }
 }

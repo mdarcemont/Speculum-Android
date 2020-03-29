@@ -3,7 +3,6 @@ package com.nielsmasdorp.speculum.interactor;
 import android.app.Application;
 
 import com.nielsmasdorp.speculum.models.Configuration;
-import com.nielsmasdorp.speculum.services.GoogleMapsService;
 import com.nielsmasdorp.speculum.services.SharedPreferenceService;
 import com.nielsmasdorp.speculum.util.Constants;
 
