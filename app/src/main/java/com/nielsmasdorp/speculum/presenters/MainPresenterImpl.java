@@ -14,6 +14,7 @@ import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
 import com.nielsmasdorp.speculum.models.YoMommaJoke;
 import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatuses;
 import com.nielsmasdorp.speculum.util.Constants;
 import com.nielsmasdorp.speculum.views.MainView;
 
@@ -366,7 +367,7 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
         }
     }
 
-    private final class RatpSubscriber extends Subscriber<RatpLineStatus> {
+    private final class RatpSubscriber extends Subscriber<RatpLineStatuses> {
 
         @Override
         public void onCompleted() {
@@ -378,8 +379,8 @@ public class MainPresenterImpl implements MainPresenter, RecognitionListener, Te
         }
 
         @Override
-        public void onNext(RatpLineStatus ratpLineStatus) {
-            view.displayRatpStatus(ratpLineStatus);
+        public void onNext(RatpLineStatuses ratpLineStatuses) {
+            view.displayRatpStatus(ratpLineStatuses);
         }
     }
 

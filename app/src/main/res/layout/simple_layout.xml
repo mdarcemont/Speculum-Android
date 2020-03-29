@@ -109,16 +109,6 @@
                 android:textSize="50sp"
                 tools:text="Cloudy with a chance of meatballs"/>
 
-            <TextView
-                android:id="@+id/tv_last_updated"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="italic"
-                tools:text="Last updated: 26 minutes ago"/>
-
         </LinearLayout>
 
     </LinearLayout>

@@ -2,13 +2,19 @@ package com.nielsmasdorp.speculum.activity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
@@ -26,6 +32,7 @@ import com.nielsmasdorp.speculum.models.Configuration;
 import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
 import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatuses;
 import com.nielsmasdorp.speculum.presenters.MainPresenter;
 import com.nielsmasdorp.speculum.util.ASFObjectStore;
 import com.nielsmasdorp.speculum.util.Constants;
@@ -50,17 +57,12 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     TextView tvWeatherTemperature;
     @BindView(R.id.weather_layout)
     LinearLayout llWeatherLayout;
-    @BindView(R.id.tv_last_updated)
-    TextView tvWeatherLastUpdated;
     @BindView(R.id.iv_listening)
     ImageView ivListening;
 
     @Nullable
     @BindView(R.id.tv_summary)
     TextView tvWeatherSummary;
-    @Nullable
-    @BindView(R.id.weather_stats_layout)
-    LinearLayout llWeatherStatsLayout;
     @Nullable
     @BindView(R.id.calendar_layout)
     LinearLayout llCalendarLayout;
@@ -107,12 +109,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @BindView(R.id.tv_forecast_date4)
     TextView tvDayFourDate;
     @Nullable
-    @BindView(R.id.tv_stats_wind)
-    TextView tvWeatherWind;
-    @Nullable
-    @BindView(R.id.tv_stats_humidity)
-    TextView tvWeatherHumidity;
-    @Nullable
     @BindView(R.id.tv_calendar_event)
     TextView tvCalendarEvent;
     @Nullable
@@ -121,11 +117,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @Nullable
     @BindView(R.id.tv_reddit_post_votes)
     TextView tvRedditPostVotes;
-    @BindView(R.id.tv_ratp_line_title)
-    TextView tvRatpLineTitle;
-    @Nullable
-    @BindView(R.id.tv_ratp_line_message)
-    TextView tvRatpLineMessage;
 
     @BindString(R.string.old_config_found_snackbar)
     String oldConfigFound;
@@ -141,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     String executing;
     @BindString(R.string.last_updated)
     String lastUpdated;
-    @BindString(R.string.google_api_key) String googleApiKey;
+    @BindString(R.string.google_api_key)
+    String googleApiKey;
 
     @Inject
     MainPresenter presenter;
@@ -219,12 +211,8 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         // Current simple weather
         this.ivWeatherCondition.setImageResource(weather.getIconId());
         this.tvWeatherTemperature.setText(weather.getTemperature());
-        this.tvWeatherLastUpdated.setText(lastUpdated + " " + weather.getLastUpdated());
 
         if (!isSimpleLayout) {
-            // More weather info
-            this.tvWeatherWind.setText(weather.getWindInfo());
-            this.tvWeatherHumidity.setText(weather.getHumidityInfo());
             // Forecast
             this.tvDayOneDate.setText(weather.getForecast().get(0).getDate());
             this.tvDayOneTemperature.setText(weather.getForecast().get(0).getTemperature());
@@ -244,17 +232,74 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
 
         if (this.llWeatherLayout.getVisibility() != View.VISIBLE) {
             this.llWeatherLayout.setVisibility(View.VISIBLE);
-            this.llWeatherStatsLayout.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     @SuppressWarnings("all")
-    public void displayRatpStatus(RatpLineStatus ratpLineStatus) {
-        System.err.println(ratpLineStatus.toString());
-        Log.d("MyApp", ratpLineStatus.toString());
-        tvRatpLineTitle.setText(ratpLineStatus.getTitle());
-        tvRatpLineMessage.setText(ratpLineStatus.getMessage());
+    public void displayRatpStatus(RatpLineStatuses ratpLineStatuses) {
+        Log.d("my app", ratpLineStatuses.toString());
+        for (RatpLineStatus status : ratpLineStatuses.getStatuses()) {
+            // Line name + title
+            LinearLayout lineNameLayout = new LinearLayout(getApplicationContext());
+            lineNameLayout.setLayoutParams(new LinearLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT));
+            lineNameLayout.setOrientation(LinearLayout.HORIZONTAL);
+            lineNameLayout.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+
+            TextView lineNameTextView = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            params.setMarginStart(16);
+            params.setMarginEnd(8);
+            lineNameTextView.setLayoutParams(params);
+            lineNameTextView.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+            lineNameTextView.setTextColor(Color.WHITE);
+            lineNameTextView.setTextSize(32);
+            lineNameTextView.setText(status.getLine());
+
+//            GradientDrawable shape = new GradientDrawable();
+//            shape.setShape(GradientDrawable.OVAL);
+//            shape.setCornerRadius(150);
+//            shape.setStroke(3, Color.WHITE);
+//            shape.setSize(40, 40);
+//            lineNameTextView.setBackground(shape);
+
+            String title = status.getSlug().contains("normal") ? "Trafic normal" : status.getTitle();
+            TextView lineTitleTextView = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            params2.setMarginStart(16);
+            lineTitleTextView.setLayoutParams(params2);
+            lineTitleTextView.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+            lineTitleTextView.setTextColor(Color.WHITE);
+            lineTitleTextView.setTextSize(28);
+            lineTitleTextView.setText(title);
+
+            lineNameLayout.addView(lineNameTextView);
+            lineNameLayout.addView(lineTitleTextView);
+
+            // Line message
+            TextView lineMessageTextView = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            params3.setMarginStart(16);
+            lineMessageTextView.setLayoutParams(params3);
+            lineMessageTextView.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+            lineMessageTextView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            lineMessageTextView.setMarqueeRepeatLimit(-1);
+            lineMessageTextView.canScrollHorizontally(1);
+            lineMessageTextView.setFocusable(true);
+            lineMessageTextView.setFocusableInTouchMode(true);
+            lineMessageTextView.setDuplicateParentStateEnabled(true);
+            lineMessageTextView.setMaxLines(2);
+            lineMessageTextView.setSingleLine(true);
+            lineMessageTextView.setTextColor(Color.WHITE);
+            lineMessageTextView.setTextSize(24);
+            lineMessageTextView.setText(status.getMessage());
+            lineMessageTextView.requestFocus();
+            lineMessageTextView.setSelected(true);
+
+            this.llRatpLayout.addView(lineNameLayout);
+            this.llRatpLayout.addView(lineMessageTextView);
+        }
+
         if (this.llRatpLayout.getVisibility() != View.VISIBLE)
             this.llRatpLayout.setVisibility(View.VISIBLE);
     }

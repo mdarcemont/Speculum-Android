@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId "com.nielsmasdorp.speculum"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 3
         versionName "1.1.0"

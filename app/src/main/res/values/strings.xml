@@ -1,10 +1,10 @@
 <resources>
 
     <!--App name-->
-    <string name="app_name" translatable="false">Speculum</string>
+    <string name="app_name" translatable="false">Assistant</string>
 
     <!--Google calendar events-->
-    <string name="no_events_today">No events today</string>
+    <string name="no_events_today">Rien aujourd\'hui</string>
     <string name="at">at</string>
     <string name="no_events_error">Could not get events from calendar</string>
 

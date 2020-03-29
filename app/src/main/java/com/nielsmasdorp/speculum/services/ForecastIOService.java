@@ -76,8 +76,6 @@ public class ForecastIOService {
                 .summary(response.getCurrently().getSummary())
                 .temperature(response.getCurrently().getTemperature().intValue() + "º" + temperatureUnit)
                 .lastUpdated(new SimpleDateFormat(!is24HourFormat ? "h:mm" : "H:mm", Locale.getDefault()).format(new Date((long) response.getCurrently().getTime() * 1000)))
-                .windInfo(response.getCurrently().getWindSpeed().intValue() + speedUnit + " " + direction + " | " + response.getCurrently().getApparentTemperature().intValue() + "º" + temperatureUnit)
-                .humidityInfo((int) (response.getCurrently().getHumidity() * 100) + "%")
                 .forecast(forecast)
                 .build());
     }

@@ -7,6 +7,7 @@ import com.nielsmasdorp.speculum.models.RedditPost;
 import com.nielsmasdorp.speculum.models.Weather;
 import com.nielsmasdorp.speculum.models.YoMommaJoke;
 import com.nielsmasdorp.speculum.models.ratp.RatpLineStatus;
+import com.nielsmasdorp.speculum.models.ratp.RatpLineStatuses;
 import com.nielsmasdorp.speculum.services.RatpService;
 import com.nielsmasdorp.speculum.util.Observables;
 import com.nielsmasdorp.speculum.services.ForecastIOService;
@@ -85,12 +86,11 @@ public class MainInteractorImpl implements MainInteractor {
     }
 
     @Override
-    public void loadRatpStatus(int updateDelay, Subscriber<RatpLineStatus> subscriber) {
+    public void loadRatpStatus(int updateDelay, Subscriber<RatpLineStatuses> subscriber) {
         System.err.println("TODOOOOO");
         Log.d("MyApp","I am here");
         compositeSubscription.add(Observable.interval(0, updateDelay, TimeUnit.MINUTES)
-                .flatMap(ignore -> ratpService.getApi().getRatpLineStatus("rers", "b"))
-                .flatMap(ratpService::getRatpLineStatus)
+                .flatMap(ignore -> ratpService.getRatpLineStatuses())
                 .retryWhen(Observables.exponentialBackoff(AMOUNT_OF_RETRIES, DELAY_IN_SECONDS, TimeUnit.SECONDS))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -36,8 +36,8 @@ public class Constants {
     /**
      * Default settings
      */
-    public static final String LOCATION_DEFAULT = "New York";
-    public static final String SUBREDDIT_DEFAULT = "news";
+    public static final String LOCATION_DEFAULT = "Ménilmontant";
+    public static final String SUBREDDIT_DEFAULT = "MusicNews";
     public static final String POLLING_DELAY_DEFAULT = "30";
 
     /**

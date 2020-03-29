@@ -14,8 +14,6 @@ public class Weather {
     private String temperature;
     private String summary;
     private String lastUpdated;
-    private String windInfo;
-    private String humidityInfo;
     private List<ForecastDayWeather> forecast;
 
     public static class Builder {
@@ -24,8 +22,6 @@ public class Weather {
         private String temperature;
         private String summary;
         private String lastUpdated;
-        private String windInfo;
-        private String humidityInfo;
         private List<ForecastDayWeather> forecast;
 
         public Builder iconId(int iconId) {
@@ -48,16 +44,6 @@ public class Weather {
             return this;
         }
 
-        public Builder windInfo(String windInfo) {
-            this.windInfo = windInfo;
-            return this;
-        }
-
-        public Builder humidityInfo(String humidityInfo) {
-            this.humidityInfo = humidityInfo;
-            return this;
-        }
-
         public Builder forecast(List<ForecastDayWeather> forecast) {
             this.forecast = forecast;
             return this;
@@ -76,8 +62,6 @@ public class Weather {
         this.temperature = builder.temperature;
         this.summary = builder.summary;
         this.lastUpdated = builder.lastUpdated;
-        this.windInfo = builder.windInfo;
-        this.humidityInfo = builder.humidityInfo;
         this.forecast = builder.forecast;
     }
 
@@ -95,14 +79,6 @@ public class Weather {
 
     public String getLastUpdated() {
         return lastUpdated;
-    }
-
-    public String getWindInfo() {
-        return windInfo;
-    }
-
-    public String getHumidityInfo() {
-        return humidityInfo;
     }
 
     public List<ForecastDayWeather> getForecast() {
