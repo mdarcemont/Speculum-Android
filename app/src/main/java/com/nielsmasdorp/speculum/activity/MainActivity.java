@@ -42,43 +42,103 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainView, View.OnSystemUiVisibilityChangeListener {
 
     // @formatter:off
-    @BindView(R.id.iv_current_weather) ImageView ivWeatherCondition;
-    @BindView(R.id.tv_current_temp) TextView tvWeatherTemperature;
-    @BindView(R.id.weather_layout) LinearLayout llWeatherLayout;
-    @BindView(R.id.tv_last_updated) TextView tvWeatherLastUpdated;
-    @BindView(R.id.iv_listening) ImageView ivListening;
+    @BindView(R.id.iv_current_weather)
+    ImageView ivWeatherCondition;
+    @BindView(R.id.tv_current_temp)
+    TextView tvWeatherTemperature;
+    @BindView(R.id.weather_layout)
+    LinearLayout llWeatherLayout;
+    @BindView(R.id.tv_last_updated)
+    TextView tvWeatherLastUpdated;
+    @BindView(R.id.iv_listening)
+    ImageView ivListening;
 
-    @Nullable @BindView(R.id.tv_summary) TextView tvWeatherSummary;
-    @Nullable @BindView(R.id.weather_stats_layout) LinearLayout llWeatherStatsLayout;
-    @Nullable @BindView(R.id.calendar_layout) LinearLayout llCalendarLayout;
-    @Nullable @BindView(R.id.reddit_layout) LinearLayout llRedditLayout;
-    @Nullable @BindView(R.id.iv_forecast_weather1) ImageView ivDayOneIcon;
-    @Nullable @BindView(R.id.tv_forecast_temp1) TextView tvDayOneTemperature;
-    @Nullable @BindView(R.id.tv_forecast_date1) TextView tvDayOneDate;
-    @Nullable @BindView(R.id.iv_forecast_weather2) ImageView ivDayTwoIcon;
-    @Nullable @BindView(R.id.tv_forecast_temp2) TextView tvDayTwoTemperature;
-    @Nullable @BindView(R.id.tv_forecast_date2) TextView tvDayTwoDate;
-    @Nullable @BindView(R.id.iv_forecast_weather3) ImageView ivDayThreeIcon;
-    @Nullable @BindView(R.id.tv_forecast_temp3) TextView tvDayThreeTemperature;
-    @Nullable @BindView(R.id.tv_forecast_date3) TextView tvDayThreeDate;
-    @Nullable @BindView(R.id.iv_forecast_weather4) ImageView ivDayFourIcon;
-    @Nullable @BindView(R.id.tv_forecast_temp4) TextView tvDayFourTemperature;
-    @Nullable @BindView(R.id.tv_forecast_date4) TextView tvDayFourDate;
-    @Nullable @BindView(R.id.tv_stats_wind) TextView tvWeatherWind;
-    @Nullable @BindView(R.id.tv_stats_humidity) TextView tvWeatherHumidity;
-    @Nullable @BindView(R.id.tv_stats_pressure) TextView tvWeatherPressure;
-    @Nullable @BindView(R.id.tv_stats_visibility) TextView tvWeatherVisibility;
-    @Nullable @BindView(R.id.tv_calendar_event) TextView tvCalendarEvent;
-    @Nullable @BindView(R.id.tv_reddit_post_title) TextView tvRedditPostTitle;
-    @Nullable @BindView(R.id.tv_reddit_post_votes) TextView tvRedditPostVotes;
+    @Nullable
+    @BindView(R.id.tv_summary)
+    TextView tvWeatherSummary;
+    @Nullable
+    @BindView(R.id.weather_stats_layout)
+    LinearLayout llWeatherStatsLayout;
+    @Nullable
+    @BindView(R.id.calendar_layout)
+    LinearLayout llCalendarLayout;
+    @Nullable
+    @BindView(R.id.reddit_layout)
+    LinearLayout llRedditLayout;
+    @Nullable
+    @BindView(R.id.iv_forecast_weather1)
+    ImageView ivDayOneIcon;
+    @Nullable
+    @BindView(R.id.tv_forecast_temp1)
+    TextView tvDayOneTemperature;
+    @Nullable
+    @BindView(R.id.tv_forecast_date1)
+    TextView tvDayOneDate;
+    @Nullable
+    @BindView(R.id.iv_forecast_weather2)
+    ImageView ivDayTwoIcon;
+    @Nullable
+    @BindView(R.id.tv_forecast_temp2)
+    TextView tvDayTwoTemperature;
+    @Nullable
+    @BindView(R.id.tv_forecast_date2)
+    TextView tvDayTwoDate;
+    @Nullable
+    @BindView(R.id.iv_forecast_weather3)
+    ImageView ivDayThreeIcon;
+    @Nullable
+    @BindView(R.id.tv_forecast_temp3)
+    TextView tvDayThreeTemperature;
+    @Nullable
+    @BindView(R.id.tv_forecast_date3)
+    TextView tvDayThreeDate;
+    @Nullable
+    @BindView(R.id.iv_forecast_weather4)
+    ImageView ivDayFourIcon;
+    @Nullable
+    @BindView(R.id.tv_forecast_temp4)
+    TextView tvDayFourTemperature;
+    @Nullable
+    @BindView(R.id.tv_forecast_date4)
+    TextView tvDayFourDate;
+    @Nullable
+    @BindView(R.id.tv_stats_wind)
+    TextView tvWeatherWind;
+    @Nullable
+    @BindView(R.id.tv_stats_humidity)
+    TextView tvWeatherHumidity;
+    @Nullable
+    @BindView(R.id.tv_stats_pressure)
+    TextView tvWeatherPressure;
+    @Nullable
+    @BindView(R.id.tv_stats_visibility)
+    TextView tvWeatherVisibility;
+    @Nullable
+    @BindView(R.id.tv_calendar_event)
+    TextView tvCalendarEvent;
+    @Nullable
+    @BindView(R.id.tv_reddit_post_title)
+    TextView tvRedditPostTitle;
+    @Nullable
+    @BindView(R.id.tv_reddit_post_votes)
+    TextView tvRedditPostVotes;
 
-    @BindString(R.string.old_config_found_snackbar) String oldConfigFound;
-    @BindString(R.string.old_config_found_snackbar_back) String getOldConfigFoundBack;
-    @BindString(R.string.give_command) String giveCommand;
-    @BindString(R.string.listening) String listening;
-    @BindString(R.string.command_understood) String commandUnderstood;
-    @BindString(R.string.executing) String executing;
-    @BindString(R.string.last_updated) String lastUpdated;
+    @BindString(R.string.old_config_found_snackbar)
+    String oldConfigFound;
+    @BindString(R.string.old_config_found_snackbar_back)
+    String getOldConfigFoundBack;
+    @BindString(R.string.give_command)
+    String giveCommand;
+    @BindString(R.string.listening)
+    String listening;
+    @BindString(R.string.command_understood)
+    String commandUnderstood;
+    @BindString(R.string.executing)
+    String executing;
+    @BindString(R.string.last_updated)
+    String lastUpdated;
+    @BindString(R.string.static_maps_api_key)
+    String mapsApiKey;
 
     // @formatter:on
 
@@ -150,6 +210,34 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         ivListening.clearAnimation();
         ivListening.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void showMap(String location) {
+
+        String url = Constants.STATIC_MAPS_URL_FIRST +
+                location + Constants.STATIC_MAPS_URL_SECOND +
+                location + Constants.STATIC_MAPS_URL_THIRD +
+                mapsApiKey;
+
+        mapDialog = new MaterialDialog.Builder(this)
+                .customView(R.layout.map_image, false)
+                .contentGravity(GravityEnum.CENTER)
+                .build();
+
+        View imageView = mapDialog.getCustomView();
+        Picasso.with(MainActivity.this).load(url).into((ImageView) imageView);
+        mapDialog.show();
+    }
+
+    @Override
+    public void hideMap() {
+        if (null != mapDialog && mapDialog.isShowing()) {
+            mapDialog.dismiss();
+            mapDialog = null;
+        }
+        hideSystemUI();
+    }
+
 
     @Override
     @SuppressWarnings("all")

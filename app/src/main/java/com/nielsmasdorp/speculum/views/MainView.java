@@ -8,13 +8,17 @@ import com.nielsmasdorp.speculum.models.Weather;
  */
 public interface MainView extends BaseView {
 
-	void showListening();
+    void showListening();
 
-	void hideListening();
+    void hideListening();
 
-	void displayCurrentWeather(Weather weather, boolean isSimpleLayout);
+    void showMap(String location);
 
-	void displayCalendarEvents(String events);
+    void hideMap();
 
-	void displayTopRedditPost(RedditPost redditPost);
+    void displayCurrentWeather(Weather weather, boolean isSimpleLayout);
+
+    void displayCalendarEvents(String events);
+
+    void displayTopRedditPost(RedditPost redditPost);
 }

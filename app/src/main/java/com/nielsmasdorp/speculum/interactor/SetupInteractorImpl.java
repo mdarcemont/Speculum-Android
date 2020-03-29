@@ -39,7 +39,10 @@ public class SetupInteractorImpl implements SetupInteractor {
 
     @Override
     public void validate(String location, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout, Subscriber<Configuration> configurationSubscriber) {
-
+        Observable.just(preferenceService.getRememberedConfiguration())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(configurationSubscriber);
     }
 
     private Observable<Configuration> generateConfiguration(String latLong, String subreddit, String pollingDelay, boolean celsius, boolean voiceCommands, boolean rememberConfig, boolean simpleLayout) {
